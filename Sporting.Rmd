@@ -1,0 +1,163 @@
+---
+title: "Homework 1"
+author: "Astha Gupta 5:45 pm Thursday_Class"
+date: "2/7/2018"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{ r }
+# Setting the working directory
+
+setwd("/Users/mountainlion/Desktop/2nd Semester/Regression")
+getwd() 
+```
+
+##Question 1
+```{r, echo=TRUE}
+# Load the data
+y <- read.table("/Users/mountainlion/Desktop/2nd Semester/Regression/HW1/Sporting.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+head(y)
+#tail(y)
+print("Summary Statistics")
+summary(y)
+```
+# Univariate Summary
+
+```{r}
+# histogram for Age
+hist(y$Age, las=TRUE, main="Histogram of Age",
+     col="blue", xlab="Age (years)", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+legend("topright", legend="roughly symmetric", bty="n", col="white", border="white", cex=1.5)	
+
+# Histogram for College
+hist(y$College, las=TRUE, main="Histogram of College",
+     col="cadetblue", xlab="College (percentage)", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+legend("topright", legend="roughly symmetric", bty="n", col="white", border="white", cex=1.5)	
+
+# histogram for HS
+hist(y$HS, las=TRUE, main="Histogram of HS",
+     col="green", xlab="HS (percentage)", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+legend("topright", legend="roughly symmetric", bty="n", col="white", border="white", cex=1.5)	
+
+# histogram for Income
+hist(y$Income, las=TRUE, main="Histogram of Income",
+     col="Yellow", xlab="Income(dollars)", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+legend("topright", legend="roughly symmetric", bty="n", col="white", border="white", cex=1.5)	
+
+# histogram for Growth
+hist(y$Growth, las=TRUE, main="Histogram of Growth",col="light Yellow", xlab="Growth(percentage/year)", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+legend("topright", legend="roughly symmetric", bty="n", col="white", border="white", cex=1.5)	
+
+# histogram for Sales
+hist(y$Sales, las=TRUE, main="Histogram of Sales",
+     col="light green", xlab="Sales(Dollar)", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+legend("topright", legend="roughly symmetric", bty="n", col="white", border="white", cex=1.5)	
+```
+
+## Summary Statistics TAble
+
+
+
+## Question 3
+
+# Compute the corelation cofficient r
+```{r}
+
+# Scatter plot of Sales vs Age
+plot(y$Sales, y$Age, las=TRUE, pch=1, xlab="Age of Customer base (years)", ylab="Sales (dollars)",
+     main="Sales versus Age", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+# add a bit of noise to each point
+plot(jitter(y$Sales), jitter(y$Age), las=TRUE, pch=1, xlab="Age of Customer base (years)", ylab="Sales(dollars)", main="A.Sales versus Age", cex.lab=2, cex.axis=1.8, 
+     cex.main=1.8)
+mtext("(jittered points)", side=1, line=5)
+
+# Scatter plot of Sales vs percentage of customer base with College diploma
+
+plot(y$Sales, y$College, las=TRUE, pch=1, xlab="Percentage of customer base with a college diploma (percentage)", ylab="Sales (dollars)",main="Sales versus college diploma", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+# add a bit of noise to each point
+plot(jitter(y$Sales), jitter(y$College), las=TRUE, pch=1, xlab="Percentage of customer base with a college diploma(percentage)", ylab="Sales(dollars)",main="Sales versus college diploma", cex.lab=2, cex.axis=1.8, 
+     cex.main=1.8)
+mtext("(jittered points)", side=1, line=5)
+
+# Scatter plot of Sales vs Income
+
+plot(y$Sales, y$Income, las=TRUE, pch=1, xlab="Income of customer base (Dollars)", ylab="Sales (dollars)",
+     main="Sales versus Income", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+# add a bit of noise to each point
+plot(jitter(y$Sales), jitter(y$Income), las=TRUE, pch=1, xlab="Income of customer base (years)", ylab="Sales(dollars)",main="Sales versus Income", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+mtext("(jittered points)", side=1, line=5)
+
+# Scatter plot of Sales vs HS
+plot(y$Sales, y$HS, las=TRUE, pch=1, xlab="Percentage of customer base with a high school diploma(Percentage)", ylab="Sales (dollars)",main="Sales versus HS", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+# add a bit of noise to each point
+plot(jitter(y$Sales), jitter(y$HS), las=TRUE, pch=1, xlab="Percentage of customer base with a high school diploma(Percentage)", ylab="Sales(dollars)",main="Sales versus HS", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+mtext("(jittered points)", side=1, line=5)
+
+# Scatter plot of Sales vs Growth
+
+plot(y$Sales, y$Growth, las=TRUE, pch=1, xlab="Annual population growth rate of customer base over the past 10 years (Percentage/year)", ylab="Sales (dollars)",main="Sales versus Growth", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+# add a bit of noise to each point
+plot(jitter(y$Sales), jitter(y$Growth), las=TRUE, pch=1, xlab="Annual population growth rate of customer base over the past 10 years (Percentage/year)", ylab="Sales(dollars)",main="Sales versus Growth", cex.lab=2, cex.axis=1.8, cex.main=1.8)
+
+# Compute Corelation
+any(is.na(y$Sales))
+any(is.na(y$Age))
+any(is.na(y$College))
+any(is.na(y$Income))
+any(is.na(y$HS))
+any(is.na(y$Growth))
+round(cor(y$Sales, y$Age), digits=4)
+round(cor(y$Sales, y$College), digits=4)
+round(cor(y$Sales, y$Income), digits = 4)
+round(cor(y$Sales, y$HS), digits=4)
+round(cor(y$Sales, y$Growth), digits=4)
+```
+## Question 4
+
+Based on the analysis, College Diploma is the best explanatory variable.
+Reason:
+## Question 6:
+Fitting a linear model, we want to include the summary output:
+```{r}
+lm.y <- lm(Sales ~ Income, data=y)
+summary(lm.y)
+```
+The formula for fitted model:
+$\hat y  =\hat\beta_0 + \hat\beta_1 x$
+ 
+The estimted slope and y-intercept in the equation :
+```{r}
+library(knitr)
+
+kable(coefficients(summary(lm(Sales ~ College, data=y))))
+names(lm.y)
+# To plot the regression Line and actual line
+par(mar=c(5.1, 4.1, 4.1, 2.1), mgp=c(3, 1, 0))
+plot(y$Income, y$Sales, las=TRUE, pch=19, col="#99000070", 
+	xlab=" Income of customer base(dollars)", ylab="Sales (dollars)",
+	main="Sales versus Income", cex.lab=1, cex.axis=1, cex.main=1)
+abline(a=0, b=1, col="firebrick", lwd=3)
+abline(coefficients(lm.y), col="forestgreen", lwd=3)
+legend("bottomright", legend="y=x", col="firebrick", lwd=3, bty="n", cex=1.5)
+
+#from summary(), see Multiple R-Squared
+summary(lm.y) 
+
+#simple linear regression, square correlation r:
+round(cor(y$Sales, y$Income)^2, digits = 4)
+
+#Fitting a Linear Model Using Summary Statistics
+#slope: beta_1 = r*sy/sx
+cor(y$Sales, y$Income)*sd(y$Sales)/sd(y$Income)
+# y-intercept: mean.y - slope*mean.x
+## check this (mean(y$Income) - beta.1*mean(y$Sales))
+range(y$Income)
+
+
+
+```
