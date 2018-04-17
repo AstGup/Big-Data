@@ -1,8 +1,6 @@
 ---
-title: "Homework 1"
-author: "Astha Gupta 5:45 pm Thursday_Class"
+author: "Astha Gupta"
 date: "2/7/2018"
-output: word_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,11 +11,12 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{ r }
 # Setting the working directory
 
-setwd("/Users/mountainlion/Desktop/2nd Semester/Regression")
+setwd("/Users/.../Regression")
 getwd() 
 ```
 
-##Question 1
+##Question 1 Identify the population and sample. What is the sample size?
+
 ```{r, echo=TRUE}
 # Load the data
 y <- read.table("/Users/mountainlion/Desktop/2nd Semester/Regression/HW1/Sporting.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
@@ -26,7 +25,7 @@ head(y)
 print("Summary Statistics")
 summary(y)
 ```
-# Univariate Summary
+##Question 2 Identify and describe the variables in the data set and the type of variable (continu- ous, discrete, nominal, or ordinal). Include histograms for each variable and discuss skewness/outliers/etc. Also, provide the following summary statistics for each variable in a table: mean, median, standard deviation, minimum and maximum. Remember to include units of measurement. Univariate Summary
 
 ```{r}
 # histogram for Age
@@ -63,7 +62,7 @@ legend("topright", legend="roughly symmetric", bty="n", col="white", border="whi
 
 
 
-## Question 3
+## Question 3 Compute the sample correlation coefficient r and scatterplots for all variables with sales (sales vs age; sales vs. HS, etc.). Is correlation an appropriate measure to describe the relationship between these variables? Justify your answer.
 
 # Compute the corelation cofficient r
 ```{r}
@@ -117,11 +116,13 @@ round(cor(y$Sales, y$Income), digits = 4)
 round(cor(y$Sales, y$HS), digits=4)
 round(cor(y$Sales, y$Growth), digits=4)
 ```
-## Question 4
+## Question 4 Based on your analysis so far, choose the best explanatory variable to use in your model. Justify your choice.
+−→ Now, using the explanatory variable you have chosen, complete the remainder of the assignment.
+
 
 Based on the analysis, College Diploma is the best explanatory variable.
-Reason:
-## Question 6:
+
+## Question 6:Include a scatterplot of sales versus your explanatory variable, add the estimated regres- sion line to your scatterplot, and describe the fit of your model.
 Fitting a linear model, we want to include the summary output:
 ```{r}
 lm.y <- lm(Sales ~ Income, data=y)
